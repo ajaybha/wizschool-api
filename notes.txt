@@ -1,0 +1,9 @@
+baseURI
+https://ajaybha.github.io/wizschool-broom/tokens/
+
+Contract URI
+collection#1
+https://ajaybha.github.io/wizschool-broom/collection.json
+
+collection#2
+https://ajaybha.github.io/wizschool-broom/collection2.json

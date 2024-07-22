@@ -1,0 +1,24 @@
+model Collection {
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  address         String      @unique
+  type            ERCType     @default(Erc721)
+  owner           User        @relation(fields: [ownerAddress], references: [address])
+  ownerAddress   String      // relation scalar field (used in the @relation attribute above)
+  metadata        CollectionMetadata
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+
+  // relationship fields
+  primarySale Sale[]
+}
+type CollectionMetadata {
+  name            String
+  description     String?
+  image           String?
+  external_link   String?
+}
+enum ERCType {
+  Erc721
+  Erc1155
+  Erc20
+}

@@ -1,0 +1,10 @@
+mongodb
+
+cluster:devdb
+
+user:dev-admin
+password: Jqn3TkxfmIo3K2WR
+
+database:wizschool-devdb
+collections: 
+main
