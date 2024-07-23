@@ -1,0 +1,33 @@
+{
+    "page": {
+        "next_cursor": null,
+        "previous_cursor": null
+    },
+    "result": [
+        {
+            "blockchain_metadata": {
+                "block_number": "11374651",
+                "log_index": "1",
+                "transaction_hash": "0x6a969c62698e845f01645ebe86ae473cd78fcf65a103a02e4ba6160753310e66",
+                "transaction_index": "0"
+            },
+            "chain": {
+                "id": "eip155:13473",
+                "name": "imtbl-zkevm-testnet"
+            },
+            "details": {
+                "amount": "1",
+                "asset": {
+                    "token_id": "340282366920938463463374607431768211456",
+                    "contract_type": "erc721",
+                    "contract_address": "0xff901b70eb902aefd9074e97a0bfca933d9de7bb"
+                },
+                "to": "0x4efc5a06be496f33974d2a2758128a4aa8c94001"
+            },
+            "id": "0190df84-f0de-fc72-21e7-2c28150800ba",
+            "indexed_at": "2024-07-23T12:15:50.058142Z",
+            "type": "mint",
+            "updated_at": "2024-07-23T12:15:50.058142Z"
+        }
+    ]
+}
