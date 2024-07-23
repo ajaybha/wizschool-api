@@ -21,11 +21,11 @@ async function run() {
     
   });
   const user = await prisma.user.upsert({
-    where: { address: "0x4EFc5A06be496F33974D2A2758128a4aA8c94001"},
+    where: { address: "0x4efc5a06be496f33974d2a2758128a4aa8c94001"},
         update : {},
         create: {
             name: "Alice Inwon",
-            address: "0x4EFc5A06be496F33974D2A2758128a4aA8c94001",
+            address: "0x4efc5a06be496f33974d2a2758128a4aa8c94001",
             email: "alice@mail.com",
             collection: {
                 create: [

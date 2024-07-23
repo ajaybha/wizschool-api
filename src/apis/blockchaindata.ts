@@ -93,6 +93,23 @@ const processMintEvent = async (mintEvent:MintActivityResult) => {
     if(updateAsset.count > 0) {
         console.log("updated asset");
     } else {
+        console.log("check if user wallet exits");
+        let userExist = await prisma.user.findUnique({
+            where: {
+                address: ownerAddr,
+            },
+            select: {
+                address: true
+            }
+        });
+        if(userExist === null) {
+            console.log("user does not exist, create new wallet entry");
+            await prisma.user.create( {
+                data: {
+                    address: ownerAddr
+                }
+            });
+        }
         console.log("check if asset exists");
         let assetExist = await prisma.asset.findUnique({
             where: {
@@ -111,6 +128,7 @@ const processMintEvent = async (mintEvent:MintActivityResult) => {
                     tokenId: tokenIdParam,
                     ownerAddress: ownerAddr,
                     collectionAddress: contractAddr,
+                    minted: true,
                     metadata: {
                         name: `Wizschool Columbus ${tokenIdParam}`,
                         description: "Top broom for the Wizschool Wizard Racers",
