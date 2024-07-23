@@ -35,7 +35,7 @@ const getCollectionWithSales = async (req:Request, res: Response, next: any) => 
                 address: req.params.address,
             },
             include: {
-                primarySale: {
+                sales: {
                     // condition for slicing the related primary sale records
                     where: {
                         active: true, 
@@ -53,6 +53,7 @@ const getCollectionWithSales = async (req:Request, res: Response, next: any) => 
                     select: {
                         startTime: true,
                         endTime: true,
+                        saleType: true,
                         mintSupply: true,
                         price: true,
                         perWalletLimit: true
@@ -65,5 +66,35 @@ const getCollectionWithSales = async (req:Request, res: Response, next: any) => 
         next(error);
     }
 };
-
-export { getCollections, getCollectionById, getCollectionWithSales };
+const getCollectionWithAssets = async (req:Request, res: Response, next: any) => {
+    try {
+        const collectionWithAssets = await prisma.collection.findUnique({
+            where: {
+                address: req.params.address,
+            },
+            include: {
+                assets: {
+                    // condition for slicing the assocaited assets
+                   where: {
+                        collectionAddress: req.params.address  
+                    },
+                    orderBy: {
+                        updatedAt: 'desc',
+                    },
+                    // only selective fields from qualified primary sale records
+                    select: {
+                        tokenId: true,
+                        minted: true,
+                        ownerAddress: true,
+                        collectionAddress: true,
+                        metadata: true
+                    }
+                }
+            }
+        });
+        return res.status(200).json({collectionWithAssets});
+    } catch (error: any) {
+        next(error);
+    }
+};
+export { getCollections, getCollectionById, getCollectionWithSales, getCollectionWithAssets };

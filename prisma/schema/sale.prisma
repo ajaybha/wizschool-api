@@ -1,7 +1,8 @@
 model Sale {
   id                    String      @id @default(auto()) @map("_id") @db.ObjectId
-  startTime            DateTime
-  endTime              DateTime
+  startTime             DateTime
+  endTime               DateTime
+  saleType              SaleType    @default(Primary)
   mintSupply            Int         @default(1000)
   price                 Float       @default(0.2)
   perWalletLimit        Int         @default(1)
@@ -10,5 +11,11 @@ model Sale {
   updatedAt             DateTime    @updatedAt
   // relationship fields
   collection            Collection  @relation(fields: [collectionAddress], references: [address])
-  collectionAddress    String      // relation scalar field (used in the @relation attribute above)
+  collectionAddress     String      // relation scalar field (used in the @relation attribute above)
+}
+
+enum SaleType {
+  Private
+  Primary
+  Secondary  
 }

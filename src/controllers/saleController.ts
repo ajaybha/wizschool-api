@@ -24,6 +24,7 @@ const getSaleById = async (req: Request, res: Response, next: any) => {
                 id: true,
                 startTime: true,
                 endTime: true,
+                saleType: true,
                 mintSupply: true,
                 price: true,
                 perWalletLimit: true,

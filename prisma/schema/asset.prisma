@@ -1,0 +1,27 @@
+model Asset {
+  id                String      @id @default(auto()) @map("_id") @db.ObjectId
+  tokenId           Int      @unique
+  minted            Boolean     @default(false)
+  metadata          AssetMetadata
+  // relationship with User(wallet)
+  // unminnted tokens are ownened by contract(collection) wallet
+  owner             User        @relation(fields: [ownerAddress], references: [address])
+  ownerAddress      String      // relation scalar field (used in the @relation attribute above)
+  // relationship with Collection(asset contract)
+  collection        Collection  @relation(fields: [collectionAddress], references: [address])
+  collectionAddress String      // relation scalar field (used in the @relation attribute above)
+  // timestamps
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+}
+type AssetMetadata {
+  name            String
+  description     String?
+  image           String?
+  external_url   String?
+  attributes      MetadataAttribute[]
+}
+type MetadataAttribute {
+    trait_type      String
+    value           String
+}

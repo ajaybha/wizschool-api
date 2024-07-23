@@ -3,7 +3,8 @@
       {
           "id": "2616a25c-25dc-402d-bae7-f34211659f50",
           "token-id": "1",
-          "owner-address": "0x4EFc5A06be496F33974D2A2758128a4aA8c94001",
+          "ownerAddress": "0x4EFc5A06be496F33974D2A2758128a4aA8c94001",
+          "collectionAddress": "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
           "metadata": {
               "name": "Clash of Hams",
               "description": "Clash of Hams is a game of strategy and skill",

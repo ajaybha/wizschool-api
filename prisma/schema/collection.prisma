@@ -3,13 +3,14 @@ model Collection {
   address         String      @unique
   type            ERCType     @default(Erc721)
   owner           User        @relation(fields: [ownerAddress], references: [address])
-  ownerAddress   String      // relation scalar field (used in the @relation attribute above)
+  ownerAddress    String      // relation scalar field (used in the @relation attribute above)
   metadata        CollectionMetadata
-  createdAt             DateTime    @default(now())
-  updatedAt             DateTime    @updatedAt
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 
   // relationship fields
-  primarySale Sale[]
+  sales           Sale[]
+  assets          Asset[]
 }
 type CollectionMetadata {
   name            String
