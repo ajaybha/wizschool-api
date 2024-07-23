@@ -1,11 +1,12 @@
 import 'dotenv/config';
 import express from 'express';
+import cron from 'node-cron';
 import {json} from 'body-parser';
 import {assetRouter} from './routes/asset';
 import {collectionRouter} from './routes/collection';
 import {saleRouter} from './routes/sale';
 import {userRouter} from './routes/user';
-
+import {pollActivities} from './apis/blockchaindata';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -21,6 +22,9 @@ app.use(express.urlencoded( { extended: true}));
 // TODO:
 // app.use(errorHandler);
 
+// polling function
+cron.schedule('0-59/2 * * * *', pollActivities);
+
 app.listen(PORT, () => {
-    console.log("server is listending on port:" + PORT);
+    console.log("server is listening on port:" + PORT);
 });
