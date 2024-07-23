@@ -6,6 +6,7 @@ import { equal } from 'assert';
 
 const prisma = new PrismaClient();
 
+// Get
 const getAssets = async (req: Request, res: Response, next: any) => {
     try {
         if(req.query.minted) {
@@ -59,7 +60,6 @@ const getAssetById = async (req: Request, res: Response, next: any) => {
         next(error);
     }
 };
-
 const getAssetWithUser = async (req: Request, res: Response, next: any) => {
     try {
         const singleAsset = await prisma.asset.findUnique({
@@ -81,4 +81,5 @@ const getAssetWithUser = async (req: Request, res: Response, next: any) => {
         next(error);
     }
 };
+
 export { getAssets, getAssetsByAddress, getAssetById, getAssetWithUser };

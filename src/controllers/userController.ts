@@ -1,8 +1,12 @@
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { request } from 'http';
 
 const prisma = new PrismaClient();
 
+/***************************************
+ * Get 
+ **************************************/
 const getUsers = async (req: Request, res: Response, next: any) => {
     try {
         const allUsers = await prisma.user.findMany();
@@ -11,7 +15,6 @@ const getUsers = async (req: Request, res: Response, next: any) => {
         next(error);
     }
 };
-
 
 const getUserByAddress = async (req: Request, res: Response, next: any) => {
     try {
@@ -57,4 +60,21 @@ const getUserWithAssets = async (req:Request, res: Response, next: any) => {
         next(error);
     }
 };
-export { getUsers, getUserByAddress, getUserWithAssets};
+
+/***************************************
+ * Create & Update
+ **************************************/
+const createUser = async (req:Request, res: Response, next: any ) => {
+    try {
+        const newUser = await prisma.user.create({
+            data: {
+                ...req.body
+            }
+        });
+        return res.status(200).json(newUser);
+    }
+    catch(error: any) {
+        next(error);
+    }
+};
+export { getUsers, getUserByAddress, getUserWithAssets, createUser};
