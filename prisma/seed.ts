@@ -56,7 +56,7 @@ async function run() {
                         assets: {
                             create: [
                                 {
-                                    tokenId: 1,
+                                    tokenId: "1",
                                     minted: false,
                                     ownerAddress: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
                                     metadata: {
@@ -82,7 +82,7 @@ async function run() {
 
                                 },
                                 {
-                                    tokenId: 2,
+                                    tokenId: "2",
                                     minted: false,
                                     ownerAddress: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
                                     metadata: {
@@ -107,7 +107,7 @@ async function run() {
                                     },
                                 }, 
                                 {
-                                    tokenId: 3,
+                                    tokenId: "3",
                                     minted: false,
                                     ownerAddress: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
                                     metadata: {

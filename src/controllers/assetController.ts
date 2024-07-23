@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { equal } from 'assert';
 
 
 
@@ -50,7 +51,7 @@ const getAssetById = async (req: Request, res: Response, next: any) => {
     try {
         const singleAsset = await prisma.asset.findUnique({
             where: {
-                tokenId: parseInt(req.params.tokenId),
+                tokenId: req.params.tokenId,
             },
         });
         return res.status(200).json({singleAsset});
@@ -63,7 +64,7 @@ const getAssetWithUser = async (req: Request, res: Response, next: any) => {
     try {
         const singleAsset = await prisma.asset.findUnique({
             where: {
-                tokenId: parseInt(req.params.tokenId),
+                tokenId: req.params.tokenId,
             },
             include:{
                 owner: {

@@ -6,7 +6,7 @@ const router = express.Router();
 import { getUsers, getUserByAddress, getUserWithAssets } from '../controllers/userController';
 
 router.route('/users').get(getUsers);
-router.route('/users/:address').get(getUserByAddress);
-router.route('/users/:address/assets').get(getUserWithAssets);
+router.route('/user/:address').get(getUserByAddress);
+router.route('/user/:address/assets').get(getUserWithAssets);
 
 export { router as userRouter };

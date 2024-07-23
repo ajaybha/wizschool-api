@@ -1,6 +1,6 @@
 model Asset {
   id                String      @id @default(auto()) @map("_id") @db.ObjectId
-  tokenId           Int      @unique
+  tokenId           String       @unique
   minted            Boolean     @default(false)
   metadata          AssetMetadata
   // relationship with User(wallet)

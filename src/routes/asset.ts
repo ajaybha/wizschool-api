@@ -7,7 +7,7 @@ import { getAssets, getAssetsByAddress, getAssetById, getAssetWithUser } from '.
 
 router.route('/assets').get(getAssets);
 router.route('/assets/:address').get(getAssetsByAddress);
-router.route('/assets/:tokenId').get(getAssetById);
-router.route('/assets/:tokenId/user').get(getAssetWithUser);
+router.route('/asset/:tokenId').get(getAssetById);
+router.route('/asset/:tokenId/user').get(getAssetWithUser);
 
 export { router as assetRouter };

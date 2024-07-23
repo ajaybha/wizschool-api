@@ -6,9 +6,9 @@ const router = express.Router();
 import { getCollections, getCollectionById, getCollectionWithSales, getCollectionWithAssets } from '../controllers/collectionController';
 
 router.route('/collections').get(getCollections);
-router.route('/collections/:address').get(getCollectionById);
-router.route('/collections/:address/sales').get(getCollectionWithSales);
-router.route('/collections/:address/assets').get(getCollectionWithAssets);
+router.route('/collection/:address').get(getCollectionById);
+router.route('/collection/:address/sales').get(getCollectionWithSales);
+router.route('/collection/:address/assets').get(getCollectionWithAssets);
 
 
 export { router as collectionRouter };
