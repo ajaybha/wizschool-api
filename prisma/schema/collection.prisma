@@ -4,19 +4,19 @@ model Collection {
   type            ERCType     @default(Erc721)
   owner           User        @relation(fields: [ownerAddress], references: [address])
   ownerAddress    String      // relation scalar field (used in the @relation attribute above)
-  metadata        CollectionMetadata
+  // metadata fields 
+  name            String
+  description     String?
+  image           String?
+  external_link   String?
+
+  // time stamp fields
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 
   // relationship fields
   sales           Sale[]
   assets          Asset[]
-}
-type CollectionMetadata {
-  name            String
-  description     String?
-  image           String?
-  external_link   String?
 }
 enum ERCType {
   Erc721

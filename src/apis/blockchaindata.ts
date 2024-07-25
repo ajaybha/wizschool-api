@@ -129,26 +129,24 @@ const processMintEvent = async (mintEvent:MintActivityResult) => {
                     ownerAddress: ownerAddr,
                     collectionAddress: contractAddr,
                     minted: true,
-                    metadata: {
-                        name: `Wizschool Columbus ${tokenIdParam}`,
-                        description: "Top broom for the Wizschool Wizard Racers",
-                        image: `https://ajaybha.github.io/wizschool-broom/tokens/${tokenIdParam}.webp`,
-                        external_url: "https://ajaybha.github.io/wizschool-broom/",
-                        attributes: [
-                            {
-                                trait_type: "Model",
-                                value: "Columbus 100"
-                            },
-                            {
-                                trait_type: "Speed",
-                                value: "Superfast"
-                            },
-                            {
-                                trait_type: "Comfort",
-                                value: "40"
-                            }
-                        ]
-                    }
+                    name: `Wizschool Columbus ${tokenIdParam}`,
+                    description: "Top broom for the Wizschool Wizard Racers",
+                    image: `https://ajaybha.github.io/wizschool-broom/tokens/${tokenIdParam}.webp`,
+                    external_url: "https://ajaybha.github.io/wizschool-broom/",
+                    attributes: [
+                        {
+                            trait_type: "Model",
+                            value: "Columbus 100"
+                        },
+                        {
+                            trait_type: "Speed",
+                            value: "Superfast"
+                        },
+                        {
+                            trait_type: "Comfort",
+                            value: "40"
+                        }
+                    ]                   
                 }
             });
             

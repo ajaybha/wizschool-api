@@ -50,7 +50,10 @@ const getSaleWithCollection = async (req:Request, res: Response, next:any) => {
                         id: true,
                         address:true,
                         type: true,
-                        metadata: true
+                        name:true,
+                        description:true,
+                        image: true,
+                        external_link:true,
                     }
                 }
             }

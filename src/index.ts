@@ -11,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use('/images', express.static('public/images'));
 app.use("/api", assetRouter);
 app.use("/api", collectionRouter);
 app.use("/api", saleRouter);

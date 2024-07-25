@@ -50,7 +50,11 @@ const getUserWithAssets = async (req:Request, res: Response, next: any) => {
                         minted: true,
                         ownerAddress: true,
                         collectionAddress: true,
-                        metadata: true
+                        name:true,
+                        description:true,
+                        image: true,
+                        external_url:true,
+                        attributes:true
                     }
                 }
             }

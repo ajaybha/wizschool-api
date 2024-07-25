@@ -26,7 +26,23 @@ const getCollectionById = async (req: Request, res: Response, next: any) => {
         next(error);
     }
 };
-
+const getCollectionMetadataById = async (req: Request, res: Response, next: any) => {
+    try {
+        return res.status(200).json(await prisma.collection.findUnique({
+            where: {
+                address: req.params.address,
+            },
+            select: {                
+                name:true,
+                description:true,
+                image: true,
+                external_link:true,
+            },
+        }));
+    } catch (error: any) {
+        next(error);
+    }
+};
 const getCollectionWithSales = async (req:Request, res: Response, next: any) => {
     try {
         const currentTime = new Date();
@@ -87,7 +103,11 @@ const getCollectionWithAssets = async (req:Request, res: Response, next: any) =>
                         minted: true,
                         ownerAddress: true,
                         collectionAddress: true,
-                        metadata: true
+                        name:true,
+                        description:true,
+                        image: true,
+                        external_url:true,
+                        attributes: true
                     }
                 }
             }
@@ -97,4 +117,4 @@ const getCollectionWithAssets = async (req:Request, res: Response, next: any) =>
         next(error);
     }
 };
-export { getCollections, getCollectionById, getCollectionWithSales, getCollectionWithAssets };
+export { getCollections, getCollectionById, getCollectionMetadataById, getCollectionWithSales, getCollectionWithAssets };
