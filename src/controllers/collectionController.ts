@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { stringify } from 'querystring';
 
 
 
 const prisma = new PrismaClient();
 
 const getCollections = async (req: Request, res: Response, next: any) => {
-    try {
+    try {       
         const allCollections = await prisma.collection.findMany();
         return res.status(200).json({allCollections});
     } catch (error: any) {
@@ -72,7 +73,11 @@ const getCollectionWithSales = async (req:Request, res: Response, next: any) => 
                         saleType: true,
                         mintSupply: true,
                         price: true,
-                        perWalletLimit: true
+                        currencySymbol:true,
+                        currencyDecimals:true,
+                        perWalletLimit: true,
+                        mintedCount: true,
+                        active: true
                     }
                 }
             }

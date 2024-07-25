@@ -5,10 +5,18 @@ model Sale {
   saleType              SaleType    @default(Primary)
   mintSupply            Int         @default(1000)
   price                 Float       @default(0.2)
+  currencySymbol        String      @default("tIMX")
+  currencyDecimals      Int         @default(0)
   perWalletLimit        Int         @default(1)
+  // updated on mint
+  mintedCount           Int         @default(0)
+  // should be updated through background job
+  // once sale is no longer feasible (either supply exhausted or time expired)
   active                Boolean     @default(false)
+  // time stamp field
   createdAt             DateTime    @default(now())
   updatedAt             DateTime    @updatedAt
+
   // relationship fields
   collection            Collection  @relation(fields: [collectionAddress], references: [address])
   collectionAddress     String      // relation scalar field (used in the @relation attribute above)

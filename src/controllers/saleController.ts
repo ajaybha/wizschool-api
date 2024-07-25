@@ -6,8 +6,91 @@ const prisma = new PrismaClient();
 
 const getSales = async (req: Request, res: Response, next: any) => {
     try {
-        const allSales = await prisma.sale.findMany();
-        return res.status(200).json({allSales});
+        if(req.query.collection) {
+            const collAddr:string =req.query.collection.toString();
+            if(collAddr) {
+                return res.status(200).json(
+                    await prisma.sale.findMany({
+                        where: {
+                            collectionAddress: collAddr
+                        }
+                    })
+                );
+            }
+        }
+        return res.status(200).json(await prisma.sale.findMany());
+    } catch (error: any) {
+        next(error);
+    }
+};
+/** get active sale by collection-address */
+const getActiveSale = async (req: Request, res: Response, next: any) => {
+    try {
+        const currentTime = new Date();
+        if(req.query.collection) {
+            const collAddr:string =req.query.collection.toString();
+            if(collAddr) {
+                return res.status(200).json(
+                    await prisma.sale.findFirst({
+                        where: {
+                            collectionAddress: collAddr,
+                            active: true, 
+                            startTime: {
+                                lt: currentTime,
+                            },
+                            endTime: {
+                                gt: currentTime
+                            },   
+                        },
+                        orderBy: {
+                            startTime: 'asc',
+                        },
+                        // only selective fields from qualified primary sale records
+                        select: {
+                            startTime: true,
+                            endTime: true,
+                            saleType: true,
+                            mintSupply: true,
+                            price: true,
+                            currencySymbol:true,
+                            currencyDecimals:true,
+                            perWalletLimit: true,
+                            mintedCount: true,
+                            active: true
+                        }
+                    })
+                );
+            }
+        }
+        return res.status(200).json(
+            await prisma.sale.findFirst({
+                where: {
+                    active: true, 
+                    startTime: {
+                        lt: currentTime,
+                    },
+                    endTime: {
+                        gt: currentTime
+                    },   
+                },
+                orderBy: {
+                    startTime: 'asc',
+                },
+                // only selective fields from qualified primary sale records
+                select: {
+                    startTime: true,
+                    endTime: true,
+                    saleType: true,
+                    mintSupply: true,
+                    price: true,
+                    currencySymbol:true,
+                    currencyDecimals:true,
+                    perWalletLimit: true,
+                    mintedCount: true,
+                    active: true
+                }
+            })
+        );
     } catch (error: any) {
         next(error);
     }
@@ -27,7 +110,10 @@ const getSaleById = async (req: Request, res: Response, next: any) => {
                 saleType: true,
                 mintSupply: true,
                 price: true,
+                currencySymbol:true,
+                currencyDecimals:true,
                 perWalletLimit: true,
+                mintedCount:true,
                 active: true,
                 collectionAddress: true
             }
@@ -64,4 +150,4 @@ const getSaleWithCollection = async (req:Request, res: Response, next:any) => {
         next(error);
     }
 };
-export {getSales, getSaleById, getSaleWithCollection};
+export {getSales, getActiveSale, getSaleById, getSaleWithCollection};
