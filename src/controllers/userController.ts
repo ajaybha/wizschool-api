@@ -30,8 +30,44 @@ const getUserByAddress = async (req: Request, res: Response, next: any) => {
 };
 
 const getUserWithAssets = async (req:Request, res: Response, next: any) => {
-    try {        
-        const userWithAssets = await prisma.user.findUnique({
+    try {   
+        
+        if(req.query.collection) {
+            const collAddr:string =req.query.collection.toString();
+            if(collAddr) {
+                return res.status(200).json(await prisma.user.findUnique({
+                    where: {
+                        address: req.params.address,
+                    },
+                    include: {
+                        assets: {
+                            // condition for slicing the related primary sale records
+                            where: {
+                                ownerAddress: req.params.address,
+                                collectionAddress: collAddr,
+                            },
+                            orderBy: {
+                                updatedAt: 'desc',
+                            },
+                            // only selective fields from qualified primary sale records
+                            select: {
+                                tokenId: true,
+                                minted: true,
+                                ownerAddress: true,
+                                collectionAddress: true,
+                                name:true,
+                                description:true,
+                                image: true,
+                                external_url:true,
+                                attributes:true
+                            }
+                        }
+                    }                    
+                }));
+            }
+        };
+
+        return res.status(200).json(await prisma.user.findUnique({
             where: {
                 address: req.params.address,
             },
@@ -58,8 +94,8 @@ const getUserWithAssets = async (req:Request, res: Response, next: any) => {
                     }
                 }
             }
-        });
-        return res.status(200).json({userWithAssets});
+        }));
+
     } catch (error: any) {
         next(error);
     }
