@@ -82,4 +82,24 @@ const getAssetWithUser = async (req: Request, res: Response, next: any) => {
     }
 };
 
-export { getAssets, getAssetsByAddress, getAssetById, getAssetWithUser };
+/***************************************
+ * Create & Update
+ **************************************/
+const updateAsset = async (req:Request, res: Response, next: any ) => {
+    try {
+        const newUser = await prisma.asset.update({
+            where: {
+                tokenId: req.params.tokenId
+            },
+            data: {
+                ownerAddress: req.body.ownerAddress,
+                minted: req.body.minted,
+            }
+        });
+        return res.status(200).json(newUser);
+    }
+    catch(error: any) {
+        next(error);
+    }
+};
+export { getAssets, getAssetsByAddress, getAssetById, getAssetWithUser, updateAsset };

@@ -62,7 +62,7 @@ async function run() {
                                     startTime: "2024-07-22T00:00:00.594Z",
                                     endTime: "2024-08-31T00:00:00.594Z",
                                     mintSupply: 10,
-                                    perWalletLimit:3,
+                                    perWalletLimit:1,
                                     active: true
                                 }
                             ]
@@ -73,7 +73,7 @@ async function run() {
                                     tokenId: "1",
                                     minted: false,
                                     ownerAddress: collection_contract_addr,                                    
-                                    name: "Wizschool Columbus 100",
+                                    name: "Wizschool Columbus #1",
                                     description: "Top broom for the Wizschool Wizard Racers",
                                     image: `${baseUri_tokenImages}/token1.webp`,
                                     external_url: `${baseUri_token_external}`,
@@ -96,7 +96,7 @@ async function run() {
                                     tokenId: "2",
                                     minted: false,
                                     ownerAddress: collection_contract_addr,
-                                    name: "Wizschool Vasco 140",
+                                    name: "Wizschool Vasco #2",
                                     description: "Top broom for the Wizschool Wizard Explorers",
                                     image: `${baseUri_tokenImages}/token2.webp`,
                                     external_url: `${baseUri_token_external}`,
@@ -119,7 +119,7 @@ async function run() {
                                     tokenId: "3",
                                     minted: false,
                                     ownerAddress: collection_contract_addr,
-                                    name: "Wizschool Tenzing 8000",
+                                    name: "Wizschool Tenzing #3",
                                     description: "Top broom for the Wizschool Wizard Highflyers",
                                     image: `${baseUri_tokenImages}/token3.webp`,
                                     external_url: `${baseUri_token_external}`,
@@ -139,6 +139,179 @@ async function run() {
                                         {
                                             trait_type: "Altitude",
                                             value: "8848"
+                                        }
+                                    ],
+                                },
+                                {
+                                    tokenId: "4",
+                                    minted: false,
+                                    ownerAddress: collection_contract_addr,                                    
+                                    name: "Wizschool Columbus #4",
+                                    description: "Top broom for the Wizschool Wizard Racers",
+                                    image: `${baseUri_tokenImages}/token4.webp`,
+                                    external_url: `${baseUri_token_external}`,
+                                    attributes: [
+                                        {
+                                            trait_type: "Model",
+                                            value: "Columbus 400"
+                                        },
+                                        {
+                                            trait_type: "Speed",
+                                            value: "Superfast"
+                                        },
+                                        {
+                                            trait_type: "Comfort",
+                                            value: "80"
+                                        }
+                                    ],
+                                },
+                                {
+                                    tokenId: "5",
+                                    minted: false,
+                                    ownerAddress: collection_contract_addr,
+                                    name: "Wizschool Vasco #5",
+                                    description: "Top broom for the Wizschool Wizard Explorers",
+                                    image: `${baseUri_tokenImages}/token5.webp`,
+                                    external_url: `${baseUri_token_external}`,
+                                    attributes: [
+                                        {
+                                            trait_type: "Model",
+                                            value: "Vasco 340"
+                                        },
+                                        {
+                                            trait_type: "Speed",
+                                            value: "Superfast"
+                                        },
+                                        {
+                                            trait_type: "Comfort",
+                                            value: "90"
+                                        }
+                                    ],
+                                }, 
+                                {
+                                    tokenId: "6",
+                                    minted: false,
+                                    ownerAddress: collection_contract_addr,
+                                    name: "Wizschool Tenzing #6",
+                                    description: "Top broom for the Wizschool Wizard Highflyers",
+                                    image: `${baseUri_tokenImages}/token6.webp`,
+                                    external_url: `${baseUri_token_external}`,
+                                    attributes: [
+                                        {
+                                            trait_type: "Model",
+                                            value: "Tenzing 600"
+                                        },
+                                        {
+                                            trait_type: "Speed",
+                                            value: "Moderate"
+                                        },
+                                        {
+                                            trait_type: "Comfort",
+                                            value: "70"
+                                        },
+                                        {
+                                            trait_type: "Altitude",
+                                            value: "6666"
+                                        }
+                                    ],
+                                },
+                                {
+                                    tokenId: "7",
+                                    minted: false,
+                                    ownerAddress: collection_contract_addr,                                    
+                                    name: "Wizschool Columbus #7",
+                                    description: "Top broom for the Wizschool Wizard Racers",
+                                    image: `${baseUri_tokenImages}/token7.webp`,
+                                    external_url: `${baseUri_token_external}`,
+                                    attributes: [
+                                        {
+                                            trait_type: "Model",
+                                            value: "Columbus 600"
+                                        },
+                                        {
+                                            trait_type: "Speed",
+                                            value: "Superfast"
+                                        },
+                                        {
+                                            trait_type: "Comfort",
+                                            value: "70"
+                                        }
+                                    ],
+                                },
+                                {
+                                    tokenId: "8",
+                                    minted: false,
+                                    ownerAddress: collection_contract_addr,
+                                    name: "Wizschool Vasco #8",
+                                    description: "Top broom for the Wizschool Wizard Explorers",
+                                    image: `${baseUri_tokenImages}/token8.webp`,
+                                    external_url: `${baseUri_token_external}`,
+                                    attributes: [
+                                        {
+                                            trait_type: "Model",
+                                            value: "Vasco 740"
+                                        },
+                                        {
+                                            trait_type: "Speed",
+                                            value: "Superfast"
+                                        },
+                                        {
+                                            trait_type: "Comfort",
+                                            value: "95"
+                                        }
+                                    ],
+                                },
+                                {
+                                    tokenId: "9",
+                                    minted: false,
+                                    ownerAddress: collection_contract_addr,
+                                    name: "Wizschool Tenzing #9",
+                                    description: "Top broom for the Wizschool Wizard Highflyers",
+                                    image: `${baseUri_tokenImages}/token9.webp`,
+                                    external_url: `${baseUri_token_external}`,
+                                    attributes: [
+                                        {
+                                            trait_type: "Model",
+                                            value: "Tenzing 700"
+                                        },
+                                        {
+                                            trait_type: "Speed",
+                                            value: "Fast"
+                                        },
+                                        {
+                                            trait_type: "Comfort",
+                                            value: "70"
+                                        },
+                                        {
+                                            trait_type: "Altitude",
+                                            value: "7777"
+                                        }
+                                    ],
+                                },
+                                {
+                                    tokenId: "10",
+                                    minted: false,
+                                    ownerAddress: collection_contract_addr,
+                                    name: "Wizschool Gummy Bears #10",
+                                    description: "Top broom for the Wizschool Wizard Funnybones",
+                                    image: `${baseUri_tokenImages}/token10.webp`,
+                                    external_url: `${baseUri_token_external}`,
+                                    attributes: [
+                                        {
+                                            trait_type: "Model",
+                                            value: "Funnybones 205"
+                                        },
+                                        {
+                                            trait_type: "Speed",
+                                            value: "Crawl"
+                                        },
+                                        {
+                                            trait_type: "Comfort",
+                                            value: "Uncomfortable"
+                                        },
+                                        {
+                                            trait_type: "Altitude",
+                                            value: "Underground"
                                         }
                                     ],
                                 },
