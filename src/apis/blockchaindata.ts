@@ -1,6 +1,9 @@
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import {config, blockchainData} from '@imtbl/sdk';
+
+import {contract_addr, account_addr, chain_name} from "../utils/networks";
+
 import { stringify } from 'querystring';
 
 /***
@@ -45,9 +48,9 @@ const client = new blockchainData.BlockchainData({
     }
 });
 // constants for polling request parameters
-const chainName: string = process.env.SANDBOX_CHAIN_NAME ? process.env.SANDBOX_CHAIN_NAME : "";
-const contractAddress: string = process.env.SANDBOX_DEFAULT_COLLECTION_CONTRACT_ADDR ? process.env.SANDBOX_DEFAULT_COLLECTION_CONTRACT_ADDR : "";
-
+const bc_network = (process.env.NETWORK || 'localhost').toUpperCase();
+const contractAddress:string = contract_addr('collection', bc_network);
+const chainName: string =chain_name(bc_network);
 const pollActivities = async () => {
     console.log("polling blockchaindata api for chain activity");
     

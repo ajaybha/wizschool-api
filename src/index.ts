@@ -9,6 +9,7 @@ import {userRouter} from './routes/user';
 import {pollActivities} from './apis/blockchaindata';
 const app = express();
 const PORT = process.env.PORT || 3000;
+const NETWORK = (process.env.NETWORK || 'localhost').toLowerCase();
 
 app.use(express.json());
 app.use('/images', express.static('public/images'));
@@ -23,8 +24,15 @@ app.use(express.urlencoded( { extended: true}));
 // TODO:
 // app.use(errorHandler);
 
-// polling function
-cron.schedule('0-59/2 * * * *', pollActivities);
+// polling function to fetch data from blockchain 
+// through network or indexer polling/ws APIs
+switch(NETWORK) {
+    case 'localhost':
+        break;
+    case 'testnet':
+        cron.schedule('0-59/2 * * * *', pollActivities);
+        break
+}
 
 app.listen(PORT, () => {
     console.log("server is listening on port:" + PORT);

@@ -1,57 +1,69 @@
+
 import { PrismaClient, SaleType, WalletType } from '@prisma/client';
+import {contract_addr, account_addr} from "../src/utils/networks";
+
 
 const prisma = new PrismaClient();
+
 const baseUri_tokenImages = process.env.BASE_URI_TOKEN_IMAGES ? process.env.BASE_URI_TOKEN_IMAGES : "";
 const baseUri_contractImages = process.env.BASE_URI_CONTRACT_IMAGES ? process.env.BASE_URI_CONTRACT_IMAGES : "";
 const baseUri_token_external = process.env.BASE_URI_TOKEN_EXTERNAL ? process.env.BASE_URI_TOKEN_EXTERNAL : "";
 const baseUri_contract_external = process.env.BASE_URI_CONTRACT_EXTERNAL ? process.env.BASE_URI_CONTRACT_EXTERNAL : "";
+
+const bc_network = (process.env.NETWORK || 'localhost').toUpperCase();
+const collection_contract_addr = contract_addr('collection', bc_network).toLowerCase();
+const deployer_account_addr = account_addr('deployer', bc_network).toLowerCase();
+const user1_account_addr = account_addr('user1', bc_network).toLowerCase();
+
+console.log(`env vars: 
+    network:${bc_network}
+    collection-contract:${collection_contract_addr}
+    deployer-account:${deployer_account_addr}
+    user1-account:${user1_account_addr}`);
+
 // this function is where we can seed data
 async function run() {
-  // insert the user (walletType: Contract) a
-  const contractWallets = await prisma.user.createMany( {
+  // insert users with no other assets or collections
+  const users = await prisma.user.createMany( {
     data: [
         {
+            // this is contract address
             name: "Brooms for the Wizards",
-            address: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
+            address: collection_contract_addr,
             walletType: WalletType.Contract
         },
         {
-            name: "Magic Wands for the Wizards",
-            address: "0x2c440fa7ca1ea2ffeebd2b50b2d1d3ba100239e1",
+            // this is deployer address
+            name: "user account 1",
+            address: user1_account_addr,
             walletType: WalletType.Contract
-        },
+        }
     ]
-    
   });
   const user = await prisma.user.upsert({
-    where: { address: "0x4efc5a06be496f33974d2a2758128a4aa8c94001"},
+    where: { address: deployer_account_addr},
         update : {},
         create: {
-            name: "Alice Inwon",
-            address: "0x4efc5a06be496f33974d2a2758128a4aa8c94001",
+            name: "Alice Inwon  (Local Deployer)",
+            address: deployer_account_addr,
             email: "alice@mail.com",
             collection: {
                 create: [
                     {
-                        address: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
+                        address: collection_contract_addr,
                         type: 'Erc721',
-                        name: "Brooms for the Wizards",
+                        name: "Wizschool Broom NFT Collection for Wizards",
                         description: "A Broom NFT collection for the wizards of the Wizschool, on Immutable zkEVM",
                         image: `${baseUri_contractImages}/collection.webp`,
-                        external_link: `${baseUri_contract_external}`,
-                        
+                        external_link: `${baseUri_contract_external}`,                        
                         sales: {
                             create: [
                                 {
-                                    startTime: "2024-07-22T09:00:00.594Z",
-                                    endTime: "2024-08-22T09:00:00.594Z",
+                                    startTime: "2024-07-22T00:00:00.594Z",
+                                    endTime: "2024-08-31T00:00:00.594Z",
                                     mintSupply: 10,
+                                    perWalletLimit:3,
                                     active: true
-                                },
-                                {
-                                    startTime: "2024-09-01T09:00:00.594Z",
-                                    endTime: "2024-10-31T09:00:00.594Z",
-                                    saleType: SaleType.Secondary
                                 }
                             ]
                         },
@@ -60,7 +72,7 @@ async function run() {
                                 {
                                     tokenId: "1",
                                     minted: false,
-                                    ownerAddress: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",                                    
+                                    ownerAddress: collection_contract_addr,                                    
                                     name: "Wizschool Columbus 100",
                                     description: "Top broom for the Wizschool Wizard Racers",
                                     image: `${baseUri_tokenImages}/token1.webp`,
@@ -83,7 +95,7 @@ async function run() {
                                 {
                                     tokenId: "2",
                                     minted: false,
-                                    ownerAddress: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
+                                    ownerAddress: collection_contract_addr,
                                     name: "Wizschool Vasco 140",
                                     description: "Top broom for the Wizschool Wizard Explorers",
                                     image: `${baseUri_tokenImages}/token2.webp`,
@@ -106,7 +118,7 @@ async function run() {
                                 {
                                     tokenId: "3",
                                     minted: false,
-                                    ownerAddress: "0xff901b70eb902aefd9074e97a0bfca933d9de7bb",
+                                    ownerAddress: collection_contract_addr,
                                     name: "Wizschool Tenzing 8000",
                                     description: "Top broom for the Wizschool Wizard Highflyers",
                                     image: `${baseUri_tokenImages}/token3.webp`,
@@ -132,19 +144,9 @@ async function run() {
                                 },
                             ]
                         }
-                    },
-                    {
-                        address: "0x2c440fa7ca1ea2ffeebd2b50b2d1d3ba100239e1",
-                        type: 'Erc721',
-                        name: "Magic Wands for the Wizards",
-                        description: "A Magic Wand NFT collection for the wizards of the Wizschool, on Immutable zkEVM",
-                        image: `${baseUri_contractImages}/collection.webp`,
-                        external_link: `${baseUri_contract_external}`,
-                    
                     }
                 ]
             }
-            
         },
     });
 
@@ -159,3 +161,4 @@ run()
     .finally(async () => {
         await prisma.$disconnect();
     });
+    
