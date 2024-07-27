@@ -150,4 +150,26 @@ const getSaleWithCollection = async (req:Request, res: Response, next:any) => {
         next(error);
     }
 };
-export {getSales, getActiveSale, getSaleById, getSaleWithCollection};
+
+/***************************************
+ * Create & Update
+ **************************************/
+const updateSale = async (req:Request, res: Response, next: any ) => {
+    try {
+        const updatedSale = await prisma.sale.update({
+            where: {
+                id: req.params.id
+            },
+            data: {                
+                mintedCount: {
+                    increment: req.body.newlyMinted
+                }
+            }
+        });
+        return res.status(200).json(updatedSale);
+    }
+    catch(error: any) {
+        next(error);
+    }
+};
+export {getSales, getActiveSale, getSaleById, getSaleWithCollection, updateSale};

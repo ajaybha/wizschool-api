@@ -63,6 +63,7 @@ async function run() {
                                     endTime: "2024-08-31T00:00:00.594Z",
                                     mintSupply: 10,
                                     perWalletLimit:1,
+                                    price:0.02,
                                     active: true
                                 }
                             ]
