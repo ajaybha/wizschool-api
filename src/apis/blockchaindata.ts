@@ -95,6 +95,29 @@ const processMintEvent = async (mintEvent:MintActivityResult) => {
     });
     if(updateAsset.count > 0) {
         console.log("updated asset");
+        console.log("find the active sale and update the mint count");
+        const currentTime = new Date();
+        const updateCollection = await prisma.sale.updateMany({
+            where: {
+                collectionAddress: contractAddr,
+                active: true, 
+                startTime: {
+                    lt: currentTime,
+                },
+                endTime: {
+                    gt: currentTime
+                },
+                updatedAt: {
+                    lt: updatedTime
+                },
+            },
+            data: {
+                mintedCount: {
+                    increment: 1
+                }
+            }
+        });
+        // 
     } else {
         console.log("check if user wallet exits");
         let userExist = await prisma.user.findUnique({
